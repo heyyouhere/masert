@@ -10,12 +10,44 @@ class Girl {
         return 'id ' + this.id + '\nname ' + this.name + '\nscore ' + this.score
     }
 }
-
+girls_names = ['Sarah',
+    'Rebecca',
+    'Jessica',
+    'Julia',
+    'Ellen',
+    'Megan',
+    'Joanna',
+    'Rachel',
+    'Anna',
+    'Jennifer',
+    'Emily',
+    'Samantha',
+    'Lauren',
+    'Maria',
+    'Victoria'
+]
+girls_info = [
+    'Sarah is an ambitious young woman who is determined to make her mark in the beauty contest. She has an eye for detail and refuses to settle for anything less than perfection.',
+    'Rebecca is an outgoing and confident contestant with a sparkle in her eye. She loves the thrill of competition and knows how to make an impression with her unique style.',
+    'Jessica is a classic beauty who is determined to outshine her rivals. She has a natural poise and elegance that have earned her plenty of admirers.',
+    'Julia is an extroverted performer who loves to show off her talents. She has a passion for fashion and knows how to rock the stage with her infectious energy.',
+    'Ellen is a natural beauty who exudes grace and sophistication. Her soft demeanour is often seen as a sign of strength, winning her plenty of admirers.',
+    'Megan is a determined and driven contestant who is determined to make her mark. She has a strong sense of style and an eye for detail that cant be ignored.',
+    'Joanna is an outgoing and confident contestant who loves to show off her talents. She has a bubbly personality that often wins her admirers and plenty of attention.',
+    'Rachel is a talented performer who is determined to make her mark in the competition. She has a unique style and a flair for the dramatic that cant be ignored.',
+    'Anna is a classic beauty who loves to showcase her talents. She has a natural poise and elegance that have earned her plenty of admirers.',
+    'Jennifer is a devoted and passionate contestant who is determined to make her mark. She has an eye for detail and refuses to settle for anything less than perfection.',
+    'Emily is an ambitious young woman who loves to show off her talents. She is determined to make her mark in the competition and is willing to go the extra mile to do so.',
+    'Samantha is an outgoing and confident contestant with a sparkling personality. She loves the thrill of competition and knows how to make an impression with her unique style.',
+    'Lauren is a talented performer who is determined to make her mark in the competition. She has a passion for fashion and knows how to rock the stage with her infectious energy.',
+    'Maria is a classic beauty who exudes grace and elegance. Her soft demeanour is often seen as a sign of strength, winning her plenty of admirers.',
+    'Victoria is an ambitious young woman who is determined to make her mark in the competition. She has a strong sense of style and an eye for detail that cant be ignored.'
+]
 
 function getArray() {
     girls_array = []
     for (i = 0; i < 4; i++) {
-        girls_array[i] = new Girl(i, true, 'Tyan ' + (i + 1) + ' Name ', i * 10, 'girl_info' + (i + 1))
+        girls_array[i] = new Girl(i, true, girls_names[i], 50, girls_info[i])
     }
     return girls_array
 }
@@ -23,14 +55,11 @@ function getArray() {
 
 
 function setModalToGirl(girl) {
-    var girl_name = document.getElementById('girl_name')
-    girl_name.textContent = girl.name;
-    var girl_info = document.getElementById('girl_info')
-    girl_info.textContent = girl.info;
-    var girl_score = document.getElementById('girl_score')
-    girl_score.value = girl.score
-    var girl_photo = document.getElementById('girl_photo')
-    girl_photo.src = 'images/' + girl.id + '.jpg'
+    document.getElementById('girl_name').textContent = girl.name;
+    document.getElementById('girl_info').textContent = girl.info;
+    document.getElementById('girl_score').value = girl.score
+    document.getElementById('girl_photo').src = 'images/' + girl.id + '.jpg'
+    document.getElementById('modal_score').textContent = girl.score
 
     /*    <div id="modal" class="modal modal-fixed-footer">
         <div class="modal-content">
@@ -64,9 +93,8 @@ var elems = document.querySelectorAll('.modal');
 let instances = M.Modal.init(elems, open);
 let parent = document.getElementById('OddGirls')
 for (let i = 0; i < girls_array.length; i++) {
-    let girl_name = 'Girl #' + (i + 1)
     let p = document.createElement("span")
-    p.textContent = girl_name
+    p.textContent = '#' + (i + 1) + ' ' + girls_array[i].name
     let div = document.createElement("div")
     let score = document.createElement('span')
     score.setAttribute('id', 'score' + girls_array[i].id)
@@ -91,8 +119,10 @@ for (let i = 0; i < girls_array.length; i++) {
 
 
 var range = document.getElementById('girl_score')
-range.onclick = function() {
+range.oninput = function() {
     let score = document.getElementById('score' + active_girl.id)
     score.textContent = range.value
     active_girl.score = range.value
+    document.getElementById('modal_score').textContent = range.value
+
 }
