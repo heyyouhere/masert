@@ -95,13 +95,9 @@ let parent = document.getElementById('OddGirls')
 for (let i = 0; i < girls_array.length; i++) {
     let p = document.createElement("span")
     p.textContent = '#' + (i + 1) + ' ' + girls_array[i].name
+    parent.appendChild(p)
+
     let div = document.createElement("div")
-    let score = document.createElement('span')
-    score.setAttribute('id', 'score' + girls_array[i].id)
-    score.textContent = girls_array[i].score
-    score.style.marginLeft = "30px"
-    div.appendChild(p)
-    div.appendChild(score)
     parent.appendChild(div)
     let button = document.createElement('button')
     button.textContent = 'Show more of Girl #' + (i + 1)
@@ -113,7 +109,14 @@ for (let i = 0; i < girls_array.length; i++) {
         setModalToGirl(active_girl)
     }
 
-    parent.appendChild(button)
+    let score = document.createElement('span')
+        //    <div class="circle">10</div>
+    score.setAttribute('class', 'circle')
+    score.setAttribute('id', 'score' + girls_array[i].id)
+    score.textContent = girls_array[i].score
+
+    div.appendChild(button)
+    div.appendChild(score)
 
 };
 
