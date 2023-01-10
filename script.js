@@ -44,9 +44,9 @@ girls_info = [
     'Victoria is an ambitious young woman who is determined to make her mark in the competition. She has a strong sense of style and an eye for detail that cant be ignored.'
 ]
 
-function getArray() {
+function getArray(amount) {
     girls_array = []
-    for (i = 0; i < 4; i++) {
+    for (i = 0; i < amount; i++) {
         girls_array[i] = new Girl(i, true, girls_names[i], 50, girls_info[i])
     }
     return girls_array
@@ -79,9 +79,9 @@ function setModalToGirl(girl) {
         </div>
 */
 }
+const GIRLS_AMOUNT = 10
 
-
-girls_array = getArray(3)
+girls_array = getArray(GIRLS_AMOUNT)
 var active_girl = girls_array[0]
 setModalToGirl(active_girl)
     // console.log(girls_array)
