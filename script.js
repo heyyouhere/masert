@@ -48,11 +48,13 @@ function getArray(amount) {
     girls_array = []
     for (i = 0; i < amount; i++) {
         girls_array[i] = new Girl(i, true, girls_names[i], 50, girls_info[i])
+        if ((i == 3) || (i == 12) || (i == 15) || (i == 13) || (i == 1)) {
+            console.log('dead')
+            girls_array[i].isAlive = false;
+        }
     }
     return girls_array
 }
-
-
 
 function setModalToGirl(girl) {
     document.getElementById('girl_name').textContent = girl.name;
@@ -79,13 +81,15 @@ function setModalToGirl(girl) {
         </div>
 */
 }
-const GIRLS_AMOUNT = 14
+const GIRLS_AMOUNT = 30
 
 girls_array = getArray(GIRLS_AMOUNT)
 const ROW_GIRL = 4
 var active_girl = girls_array[0]
 setModalToGirl(active_girl)
     // console.log(girls_array)
+document.getElementById('girl_name').style.color = 'white'
+document.getElementById('girl_info').style.color = 'white'
 
 // let elems = document.querySelectorAll('.carousel-item')
 // var elems = document.querySelectorAll('.carousel');
@@ -113,12 +117,13 @@ for (let i = 0; i < girls_array.length; i++) {
 
 
     button.setAttribute('type', 'image')
-    button.setAttribute('src', 'images/' + i + '.jpg')
+    button.setAttribute('src', 'images/10.jpg')
+        // button.setAttribute('src', 'images/' + i + '.jpg')
     button.textContent = 'Show more of Girl #' + (i + 1)
     button.setAttribute('data-target', 'modal')
     button.setAttribute('class', 'btn modal-trigger')
-    button.style.backgroundcolor =
-        button.setAttribute('id', 'girl-button' + i)
+    button.style.background = 'transparent'
+    button.setAttribute('id', 'girl-button' + i)
     button.setAttribute('align', 'bottom')
     button.onclick = function() {
         active_girl = girls_array[i]
@@ -133,6 +138,8 @@ for (let i = 0; i < girls_array.length; i++) {
     // card.appendChild(test_div)
     score.setAttribute('align', 'top')
 
+    number.style.color = 'white'
+    name.style.color = 'white'
     card.appendChild(number)
     card.appendChild(name)
     card.appendChild(score)
@@ -155,13 +162,13 @@ range.oninput = function() {
 
 var deleteButton = document.getElementById('remove_girls')
 deleteButton.onclick = function() {
-    for (var i = GIRLS_AMOUNT - 1; i > (GIRLS_AMOUNT - 1) / 2; --i) {
-        console.log(i)
-        if (girls_array[i].isAlive == false) {
-            document.getElementById('girl-button' + i).setAttribute('class', "btn disabled")
-        } else {
+    for (var i = 0; i < GIRLS_AMOUNT; i++) {
+        if (!girls_array[i].isAlive) {
+            document.getElementById('girl-button' + i).style.filter = 'grayscale(1)'
             console.log('norm')
-                // document.getElementById('girl-button' + i).setAttribute('class', "btn disabled")
+
+        } else {
+            // document.getElementById('girl-button' + i).setAttribute('class', "btn disabled")
         }
 
     }
