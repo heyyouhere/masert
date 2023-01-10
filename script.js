@@ -82,6 +82,7 @@ function setModalToGirl(girl) {
 const GIRLS_AMOUNT = 10
 
 girls_array = getArray(GIRLS_AMOUNT)
+const ROW_GIRL = 4
 var active_girl = girls_array[0]
 setModalToGirl(active_girl)
     // console.log(girls_array)
@@ -93,13 +94,22 @@ var elems = document.querySelectorAll('.modal');
 let instances = M.Modal.init(elems, open);
 let parent = document.getElementById('OddGirls')
 for (let i = 0; i < girls_array.length; i++) {
+    if (i % ROW_GIRL == 0) {
+        var current_div = document.createElement('div')
+        current_div.setAttribute('id', 'test' + i)
+        parent.appendChild(current_div)
+    }
     let p = document.createElement("span")
     p.textContent = '#' + (i + 1) + ' ' + girls_array[i].name
-    parent.appendChild(p)
 
     let div = document.createElement("div")
     parent.appendChild(div)
-    let button = document.createElement('button')
+    let button = document.createElement('input')
+    button.setAttribute('style', 'height:200px; width:200px')
+        // button.setAttribute('width', '200px')
+
+    button.setAttribute('type', 'image')
+    button.setAttribute('src', 'images/' + i + '.jpg')
     button.textContent = 'Show more of Girl #' + (i + 1)
     button.setAttribute('data-target', 'modal')
     button.setAttribute('class', 'btn modal-trigger')
@@ -110,13 +120,13 @@ for (let i = 0; i < girls_array.length; i++) {
     }
 
     let score = document.createElement('span')
-        //    <div class="circle">10</div>
     score.setAttribute('class', 'circle')
     score.setAttribute('id', 'score' + girls_array[i].id)
     score.textContent = girls_array[i].score
 
-    div.appendChild(button)
-    div.appendChild(score)
+    current_div.appendChild(p)
+    p.appendChild(button)
+    p.appendChild(score)
 
 };
 
@@ -128,4 +138,19 @@ range.oninput = function() {
     active_girl.score = range.value
     document.getElementById('modal_score').textContent = range.value
 
+}
+
+
+var deleteButton = document.getElementById('remove_girls')
+deleteButton.onclick = function() {
+    for (var i = GIRLS_AMOUNT - 1; i > (GIRLS_AMOUNT - 1) / 2; --i) {
+        console.log(i)
+        if (girls_array[i].isAlive == false) {
+            document.getElementById('girl-button' + i).setAttribute('class', "btn disabled")
+        } else {
+            console.log('norm')
+                // document.getElementById('girl-button' + i).setAttribute('class', "btn disabled")
+        }
+
+    }
 }
