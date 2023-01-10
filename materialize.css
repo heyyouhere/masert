@@ -12,6 +12,10 @@
     background: hsl(294, 37%, 51%);
 }
 
+.grid-container {
+    display: inline-grid;
+}
+
 
 /*!
  * Materialize v1.0.0 (http://materializecss.com)
@@ -5984,7 +5988,7 @@ body.keyboard-focused .dropdown-content li:focus {
 }
 
 
-/* Firefox Bug: link not triggered */
+/* Firefox Bug: link not ed */
 
 .waves-effect .waves-ripple {
     z-index: -1;
