@@ -79,7 +79,7 @@ function setModalToGirl(girl) {
         </div>
 */
 }
-const GIRLS_AMOUNT = 10
+const GIRLS_AMOUNT = 14
 
 girls_array = getArray(GIRLS_AMOUNT)
 const ROW_GIRL = 4
@@ -90,30 +90,36 @@ setModalToGirl(active_girl)
 // let elems = document.querySelectorAll('.carousel-item')
 // var elems = document.querySelectorAll('.carousel');
 // var instances = M.Carousel.init(elems, 'noWrap', dist = 100);
+
 var elems = document.querySelectorAll('.modal');
 let instances = M.Modal.init(elems, open);
 let parent = document.getElementById('OddGirls')
 for (let i = 0; i < girls_array.length; i++) {
-    if (i % ROW_GIRL == 0) {
-        var current_div = document.createElement('div')
-        current_div.setAttribute('id', 'test' + i)
-        parent.appendChild(current_div)
-    }
-    let p = document.createElement("span")
-    p.textContent = '#' + (i + 1) + ' ' + girls_array[i].name
+    let card = document.createElement('span')
+    card.setAttribute('id', 'card')
+    card.setAttribute('class', 'col s2')
+        // let info_div = document.createElement('div')
 
-    let div = document.createElement("div")
-    parent.appendChild(div)
+    let number = document.createElement('span')
+    let name = document.createElement("span")
+    number.setAttribute('align', 'top')
+    name.setAttribute('align', 'top')
+
+    number.textContent = '#' + girls_array[i].id
+    name.textContent = ' ' + girls_array[i].name
+
     let button = document.createElement('input')
-    button.setAttribute('style', 'height:200px; width:200px')
-        // button.setAttribute('width', '200px')
+    button.setAttribute('style', 'height:225px; width:300px')
+
 
     button.setAttribute('type', 'image')
     button.setAttribute('src', 'images/' + i + '.jpg')
     button.textContent = 'Show more of Girl #' + (i + 1)
     button.setAttribute('data-target', 'modal')
     button.setAttribute('class', 'btn modal-trigger')
-    button.setAttribute('id', 'girl-button' + i)
+    button.style.backgroundcolor =
+        button.setAttribute('id', 'girl-button' + i)
+    button.setAttribute('align', 'bottom')
     button.onclick = function() {
         active_girl = girls_array[i]
         setModalToGirl(active_girl)
@@ -124,10 +130,16 @@ for (let i = 0; i < girls_array.length; i++) {
     score.setAttribute('id', 'score' + girls_array[i].id)
     score.textContent = girls_array[i].score
 
-    current_div.appendChild(p)
-    p.appendChild(button)
-    p.appendChild(score)
+    // card.appendChild(test_div)
+    score.setAttribute('align', 'top')
 
+    card.appendChild(number)
+    card.appendChild(name)
+    card.appendChild(score)
+
+    // card.appendChild(info_div)
+    card.appendChild(button)
+    parent.appendChild(card)
 };
 
 
