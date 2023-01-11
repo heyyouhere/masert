@@ -102,7 +102,6 @@ for (let i = 0; i < girls_array.length; i++) {
     let card = document.createElement('span')
     card.setAttribute('id', 'card')
     card.setAttribute('class', 'col s2')
-        // let info_div = document.createElement('div')
 
     let number = document.createElement('span')
     let name = document.createElement("span")
@@ -113,7 +112,7 @@ for (let i = 0; i < girls_array.length; i++) {
     name.textContent = ' ' + girls_array[i].name
 
     let button = document.createElement('input')
-    button.setAttribute('style', 'height:225px; width:300px')
+    button.setAttribute('style', 'height:200px; width:250px')
 
 
     button.setAttribute('type', 'image')
@@ -150,6 +149,8 @@ for (let i = 0; i < girls_array.length; i++) {
 };
 
 
+
+//Updating Scores on mane page and in text field in modal
 var range = document.getElementById('girl_score')
 range.oninput = function() {
     let score = document.getElementById('score' + active_girl.id)
@@ -160,11 +161,17 @@ range.oninput = function() {
 }
 
 
+
+//Losers block
 var deleteButton = document.getElementById('remove_girls')
 deleteButton.onclick = function() {
     for (var i = 0; i < GIRLS_AMOUNT; i++) {
         if (!girls_array[i].isAlive) {
             document.getElementById('girl-button' + i).style.filter = 'grayscale(1)'
+            setTimeout(function() {
+                document.getElementById('girl-button' + i).style.filter = 'grayscale(0)'
+            }, 1000); // Wait 1s
+
             console.log('norm')
 
         } else {
