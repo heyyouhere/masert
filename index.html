@@ -12,12 +12,18 @@ background-size: 100% 100%;">
 
 
 
-<body>
-    <!-- <button id="remove_girls">Next Round</button>
-    <p>Имя судьи</p>
-    <input id='judge'></input> -->
+<body style="-webkit-user-select:none;-moz-user-select:-moz-none;-ms-user-select:none;user-select:none">
+    <button id="remove_girls">Next Round</button>
+    <!-- <p>Имя судьи</p> -->
+    <!-- <input id='judge'></input> -->
+    <div style='margin-top: 10%; margin-left: 10px'>
 
-    <div id="OddGirls" class="row"></div>
+        <div id="FirstRow"></div>
+        <div id="SecondRow"></div>
+        <div id="ThirdRow"></div>
+        <div id="FourthRow"></div>
+    </div>
+
     <div id="modal" class="modal" style="background-image: url('images/back.png');
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -43,21 +49,6 @@ background-size: 100% 100%;">
         </div>
     </div>
 
-    <button id="sendButton">Отправить</button>
-    <script>
-        let b = document.getElementById("sendButton")
-        b.onclick = function() {
-            let IPxhr = new XMLHttpRequest();
-            IPxhr.open('POST', "http://192.168.0.132:502", true);
-            result = ''
-            for (let i = 0; i < 5; i++) {
-                result += document.getElementById('score' + i).value + '&';
-            }
-            result = document.getElementById('judge').value + '&' + result;
-            console.log(result)
-            IPxhr.send(result)
-        }
-    </script>
 
 </body>
 <script src="script.js" type="text/javascript"></script>
