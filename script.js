@@ -112,7 +112,7 @@ for (let i = 0; i < girls_array.length; i++) {
     name.textContent = ' ' + girls_array[i].name
 
     let button = document.createElement('input')
-    button.setAttribute('style', 'height:200px; width:250px')
+    button.setAttribute('style', 'height:150px; width:200px')
 
 
     button.setAttribute('type', 'image')
@@ -180,3 +180,15 @@ deleteButton.onclick = function() {
 
     }
 }
+
+
+$(function() {
+    var rangePercent = $('[type="range"]').val();
+    $('[type="range"]').on('change input', function() {
+        rangePercent = $('[type="range"]').val();
+        $('h4').html(rangePercent + '<span></span>');
+        $('[type="range"], h4>span').css('filter', 'hue-rotate(-' + rangePercent + 0.0001 + 'deg)');
+        // $('h4').css({'transform': 'translateX(calc(-50% - 20px)) scale(' + (1+(rangePercent/100)) + ')', 'left': rangePercent+'%'});
+        $('h4').css({ 'transform': 'translateX(-50%) scale(' + (1 + (rangePercent / 100)) + ')', 'left': rangePercent + '%' });
+    });
+});
