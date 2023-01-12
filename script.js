@@ -117,23 +117,17 @@
     var elems = document.querySelectorAll('.modal');
     let instances = M.Modal.init(elems, open);
     let parent
-    let card_height = 140
-    let card_width = card_height + 50
-    document.getElementById('FirstRow').setAttribute('style', 'margin-left:' + (card_width / 3) + 'px')
-    document.getElementById('ThirdRow').setAttribute('style', 'margin-left:' + (card_width / 3) + 'px')
-    document.getElementById('FourthRow').setAttribute('style', 'margin-left:' + 2 * (card_width / 3) + 'px')
+    let modifier = 0.58
+    let card_height = 358 * modifier
+    let card_width = 368 * modifier
+    document.getElementById('FirstRow').setAttribute('style', 'margin-left:' + (card_width / 2) + 'px')
+    document.getElementById('ThirdRow').setAttribute('style', 'margin-left:' + (card_width / 2) + 'px')
+    document.getElementById('FourthRow').setAttribute('style', 'margin-left:' + card_width + 'px')
 
     for (let i = 0; i < girls_array.length; i++) {
-
         let card = document.createElement('span')
         card.setAttribute('id', 'card')
-        let number = document.createElement('span')
-        let name = document.createElement("span")
-        number.setAttribute('align', 'top')
-        name.setAttribute('align', 'top')
 
-        number.textContent = '#' + girls_array[i].id
-        name.textContent = ' ' + girls_array[i].name
 
         let button = document.createElement('input')
         button.setAttribute('style', 'height: ' + card_height + 'px; width:' + card_width + 'px')
@@ -148,27 +142,19 @@
         button.style.background = 'transparent'
         button.setAttribute('id', 'girl-button' + i)
         button.setAttribute('align', 'bottom')
+
+        var score_on_button = document.createElement('span')
+        score_on_button.setAttribute('class', 'cr')
+        score_on_button.setAttribute('id', 'score' + girls_array[i].id)
+        score_on_button.textContent = '50'
+        card.appendChild(score_on_button)
+
         button.onclick = function() {
             girls_array[i].wasVoted = true
             active_girl = girls_array[i]
             setModalToGirl(active_girl)
         }
 
-        let score = document.createElement('span')
-        score.setAttribute('class', 'circle')
-        score.setAttribute('id', 'score' + girls_array[i].id)
-        score.textContent = girls_array[i].score
-
-        // card.appendChild(test_div)
-        score.setAttribute('align', 'top')
-
-        number.style.color = 'white'
-        name.style.color = 'white'
-            // card.appendChild(number)
-            // card.appendChild(name)
-            // card.appendChild(score)
-
-        // card.appendChild(info_div)
         card.appendChild(button)
         if (i < 9) {
             parent = document.getElementById('FirstRow')
@@ -183,10 +169,12 @@
             // parent.appendChild()
     };
 
-    var sendButton = document.createElement("button")
+    var sendButton = document.createElement("input")
     sendButton.setAttribute('id', 'sendButton')
+
+    sendButton.setAttribute('type', 'image')
+    sendButton.setAttribute('src', 'images/ok.png')
     sendButton.setAttribute('style', 'margin-left:13%; width: 300px; height: 80px')
-    sendButton.textContent = 'OK'
 
 
     sendButton.onclick = function() {
@@ -222,7 +210,7 @@
     var range = document.getElementById('girl_score')
     range.oninput = function() {
         let score = document.getElementById('score' + active_girl.id)
-            // score.textContent = range.value
+        score.textContent = range.value
         active_girl.score = range.value
         document.getElementById('modal_score').textContent = range.value
 
